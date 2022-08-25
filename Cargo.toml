@@ -8,7 +8,7 @@ edition = "2021"
 riscv-rt = "0.8.0"
 embedded-hal = "=1.0.0-alpha.5"
 # Only using the local copy while I am working on updating the timers in the hal:
-bl602-hal = { git = "https://github.com/kiyoshigawa/bl602-hal" }
+bl602-hal = { git = "https://github.com/sipeed/bl602-hal" }
 panic-halt = "0.2.0"
 riscv = "0.7.0"
 embedded-time = "0.12.0"
@@ -18,12 +18,16 @@ rand = { version = "0.8.4", features = ["small_rng"], default-features = false }
 arrayvec = { version = "0.7.2", default-features = false }
 panic-write = "0.1.0"
 
+[patch.crates-io]
+radium = { git = "https://github.com/tyllmoritz/radium", branch = "target_has_atomic_0.6.2" }
+
 # You probably don't want to use a debug build, but lots of people accidentally do
 # give the code at least a low level of optimization
 [profile.dev]
 codegen-units = 1
-lto = true
 opt-level = 1
+# lto didn't work here with build-std = ["core"] and nightly-2022-04-25
+# lto = true
 
 # Different optimization level for dependencies in debug mode
 # So you can keep the main code more debuggable and still save some space

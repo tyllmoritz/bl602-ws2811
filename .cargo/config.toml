@@ -1,4 +1,4 @@
-[target.riscv32imac-unknown-none-elf]
+[target.riscv32imfc-unknown-none-elf]
 rustflags = [
   "-C", "link-arg=-Tmemory.x",
   "-C", "link-arg=-Tlink.x",
@@ -6,8 +6,11 @@ rustflags = [
 ]
 runner = "blash --port COM7 --monitor-baud 2000000 --"
 
+[unstable]
+build-std = ["core"]
+
 [build]
-target = "riscv32imac-unknown-none-elf"
+target = "riscv32imfc-unknown-none-elf.json"
 
 [alias]
 flash = ["--color=always", "blflash", "--release", "--port=COM7"]
